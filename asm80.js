@@ -53,7 +53,7 @@ var program = require('commander');
 program.version('1.0.0')
   .usage('[options] <file>')
   .option('-o, --output <file>', 'Output file name')
-  .option('-t, --type <type>', 'Output type [default: hex] - hex, srec, com (for CP/M), sna, tap (for ZX Spectrum), prg (for C64)')
+  .option('-t, --type <type>', 'Output type [default: hex] - hex, srec, bin, com (for CP/M), sna, tap (for ZX Spectrum), prg (for C64)')
   .option('-n, --nolist', 'Suppress listing')
   .option('-m, --machine <type>', 'Processor type (see below)')
   .on('--help', function(){
@@ -133,6 +133,7 @@ var otype = 'hex';
 if (program.type) {
   switch (program.type.toUpperCase()) {
     case "SREC": otype="srec"; break;
+    case "BIN": otype="bin"; break;
     case "HEX": otype="hex"; break;
     case "PRG": otype="prg"; break;
     case "COM": otype="com"; break;
@@ -166,6 +167,11 @@ if (otype === "prg") {
 if (otype === "com") {
   if (asmtype!=="I8080" && asmtype !== "Z80") {console.log("Warning: COM is for CP/M, it should be compiled for 8080/Z80 CPU");}
   outdata = hextools.hex2com(outdata,ASM.ENT);
+}
+
+if (otype === "bin") {
+  if (asmtype!=="I8080" && asmtype !== "Z80") {console.log("Warning: BIN is for CP/M, it should be compiled for 8080/Z80 CPU");}
+  outdata = hextools.hex2bin(outdata,ASM.ENT);
 }
 
 if (otype === "sna") {

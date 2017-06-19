@@ -156,6 +156,12 @@ var  hex2com = function(hex) {
     return Buffer.from(out);
   };
 
+var hex2bin = function(hex) {
+    RAM=new Uint8Array(65536);
+    var lastaddr = readHex(hex,0)+1;
+    var out = RAM.subarray(0,lastaddr);
+    return Buffer.from(out);
+}
 
 var  hex2prg = function(hex,ent) {
     if (ent<0x810) {console.log("ENT must be above $810"); process.exit(-1);}
@@ -190,6 +196,7 @@ var  hex2prg = function(hex,ent) {
   module.exports = {
     "hex2prg": hex2prg,
     "hex2com": hex2com,
+    "hex2bin": hex2bin,
     "makeSNA": makeSNA,
     "makeTAP": makeTAP
 

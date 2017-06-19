@@ -329,6 +329,9 @@ var ASM = {};
         if (includedFiles[params[0]]) throw {"msg":"File "+params[0]+" is already included elsewhere - maybe recursion at line "+op.numline,"s":op};
         //console.log("Include "+params[0]);
         var nf = fileGet(params[0]);
+        if (nf === null) {
+          throw {"msg":"Couldn't open included file " + params[0], "s":op};
+        }
         //console.log(nf);
         var ni = toInternal(nf.split(/\n/));
         ni = nonempty(ni);

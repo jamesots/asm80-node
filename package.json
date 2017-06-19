@@ -1,5 +1,5 @@
 {
-  "name": "asm80",
+  "name": "zsm80",
   "version": "1.0.1",
   "description": "ASM80 stand-alone assembler",
   "main": "asm80.js",
@@ -12,7 +12,7 @@
     "url": "https://github.com/maly/asm80-node.git"
   },
   "bin": {
-    "asm80": "./asm80.js"
+    "zsm80": "./asm80.js"
   },
   "keywords": [
     "Assembler",
